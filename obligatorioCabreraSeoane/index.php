@@ -9,6 +9,7 @@ $mensaje = $_SESSION['mensaje'] = "";
 $smarty = getSmarty();
 
 $smarty->assign("mensaje",$mensaje);
+$smarty->assign("publicaciones", obtenerPublicacionesParaIndex());
 $smarty->assign("especies", obtenerEspecies());
 $smarty->assign("barrios", obtenerBarrios());
 $smarty->assign("razas", obtenerRazaBy(1));

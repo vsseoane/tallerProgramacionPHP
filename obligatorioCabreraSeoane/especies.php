@@ -1,15 +1,15 @@
 <?php
-
 session_start();
 require_once 'utils.php';
 
-alert("en especies php");
-console.log("estoy aczzzzzz");
-$accion = strlen($_POST["accion"]) ? $_POST["accion"] : $_GET["accion"];
-$especie = strlen($_POST["especie"]) ? $_POST["especie"] : $_GET["especie"];
+$accion = "";
+$especie = "";
+
+$accion = isset($_POST["accion"]) ? $_POST["accion"] : $_GET["accion"];
+$especie = isset($_POST["especie"]) ? $_POST["especie"] : $_GET["especie"];
 
 if($accion == "ajax" && strlen($especie)){
-    $conn->conectar();
+    $conn = getConexion();
     
     $sql = "select * from razas where especie_id = :especie order by nombre";
     
@@ -39,3 +39,5 @@ if($accion == "ajax" && strlen($especie)){
 
     $smarty->display("publish.tpl");
 }
+
+

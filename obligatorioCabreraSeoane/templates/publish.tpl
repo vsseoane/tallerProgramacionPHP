@@ -66,13 +66,6 @@
 
 
                                 </div>
-                                <div id="resultado"></div>
-
-                                <div style="display: none">
-                                    <div id="dialog-cargando" title="">
-                                        <p><img src="imagenes/loading-icon.gif" alt="cargando..." /></p>
-                                    </div>
-                                </div>
                                 <div class="col-3">
                                     <div class="form-check">
                                         <label class="form-check-label">

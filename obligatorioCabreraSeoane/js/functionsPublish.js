@@ -15,10 +15,9 @@ function inicializo(){
 
 function llenarRazas(){
     var especie_id =  $("#especie").val(); 
-    alert("el valor es cambie a  : " + especie_id);
+   
 }
 function cargarEspecie(especie){
-    alert("especieeee cambie " + especie);
     $.ajax({
                     url: "especies.php",
                     dataType: "json",
@@ -26,13 +25,12 @@ function cargarEspecie(especie){
                     data: "accion=ajax&especie=" + especie,
                     timeout: 2000,
                     beforeSend: function () {
-                        cargando();
+                     //   cargando();
                     }
                 }).done(function(data){
-                alert("en razas"); 
                 var select = $("#razas").empty();
                     
-                    select.append("<option value=''> -- Seleccione una raza2 -- </option>");
+                    select.append("<option value=''> -- Seleccione una raza -- </option>");
                     
                     for (var i = 0; i < data.length; i++) {
                         var option = $("<option />");
@@ -41,16 +39,16 @@ function cargarEspecie(especie){
                         select.append(option);
                     }
                     
-                    $(cargandoDialog).dialog( "close" );
+                    // $(cargandoDialog).dialog( "close" );
                     
-                    $("#resultado").html( select.val() );
+                   // $("#resultado").html( select.val() );
                 });
     
     
 }
 
   var cargandoDialog = null;
-            function cargando(){
+            /*function cargando(){
                 alert("en cargando");
                 cargandoDialog = $( "#dialog-cargando" ).dialog({
                     resizable: false,
@@ -63,4 +61,5 @@ function cargarEspecie(especie){
                     }
                 });
                 
-            }
+            }*/
+            
