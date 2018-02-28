@@ -52,7 +52,7 @@
 
                         <div class="col">
                             <select class="custom-select" name="especie" id="especie">
-                                <option selected>Especie</option>
+                                <option value='' selected>Especie</option>
                                 {foreach from=$especies item=especie}
                                     <option value="{$especie.id}">{$especie.nombre}</option>
                                 {/foreach}
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col">
                             <select class="custom-select" name="razas">
-                                <option selected>Raza</option>
+                                <option value='' selected>Raza</option>
                                 {foreach from=$razas item=raza}
                                     <option value="{$raza.id}">{$raza.nombre}</option>
                                 {/foreach}
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col">
                             <select class="custom-select" name="barrio">
-                                <option selected>Barrio</option>
+                                <option value='' selected>Barrio</option>
                                 {foreach from=$barrios item=barrio}
                                     <option value="{$barrio.id}">{$barrio.nombre}</option>
                                 {/foreach}

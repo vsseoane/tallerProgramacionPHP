@@ -99,6 +99,6 @@ function obtenerBarrios(){
 function obtenerRazaBy($especie_id){
     $cn = getConexion();
     $cn->consulta("select * from razas where especie_id=:especieID", array(array('especieID', $especie_id,'string')));
-    return $cn->restantesRegistros();
+    return $cn->restantesRegistros(); 
     
 }

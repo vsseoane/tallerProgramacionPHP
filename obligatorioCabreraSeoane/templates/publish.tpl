@@ -19,7 +19,7 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/functions.js" type="text/javascript"></script>
-       <script src="js/functionsPublish.js" type="text/javascript"></script>
+        <script src="js/functionsPublish.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -42,7 +42,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-3">
                                     <select class="custom-select" name="especie" id="especie">
-                                        <option selected>Especie</option>
+                                        <option value='' selected>Seleccione una Especie</option>
                                         {foreach from=$especies item=especie}
                                             <option value="{$especie.id}">{$especie.nombre}</option>
                                         {/foreach}
@@ -52,23 +52,26 @@
                                 <div class="col-3">
 
                                     <select class="custom-select" name="razas" id="razas">
-                                        <option selected>Raza</option>
-                                        {foreach from=$razas item=raza}
-                                            <option value="{$raza.id}">{$raza.nombre}</option>
-                                        {/foreach}
-
+                                        <option value=' '>Seleccione una Raza</option>
                                     </select>
                                 </div>
                                 <div class="col-3">
                                     <select class="custom-select" name="barrio">
-                                        <option selected>Barrio</option>
+                                        <option value='' selected>Barrio</option>
                                         {foreach from=$barrios item=barrio}
-                                            <option value="{$barrio.id}">{$barrio.nombre}</option>
+                                            <option value  ="{$barrio.id}">{$barrio.nombre}</option>
                                         {/foreach}
 
                                     </select>
 
 
+                                </div>
+                                <div id="resultado"></div>
+
+                                <div style="display: none">
+                                    <div id="dialog-cargando" title="">
+                                        <p><img src="imagenes/loading-icon.gif" alt="cargando..." /></p>
+                                    </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-check">
