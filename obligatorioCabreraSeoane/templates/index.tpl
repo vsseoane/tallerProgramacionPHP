@@ -38,16 +38,15 @@
                     <div class="row justify-content-start">
 
                         <div class="col-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked> Encontrado
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"> No encontrado
-                                </label>
-                            </div>
+
+                        <div class="col">
+                            <select class="custom-select" name="estado" id="estado">
+                                <option value='' selected>Estado</option>
+                                <option value="1"> Encontrado</option>
+                               <option value="2"> Perdido</option>
+
+                            </select>
+                        </div>
                         </div>
 
                         <div class="col">
@@ -131,8 +130,9 @@
             </div>
 
             <div id="publicaciones">
-                {foreach from=$publicaciones item=pub}
+                
                     <div class="row">
+                        {foreach from=$publicaciones item=pub}
                         <div class="col">
                             <div class="card" style="width: 20rem;">
                                 <div class="not-found card-header">{$pub.tipo}</div>
@@ -146,7 +146,7 @@
                             </div>
 
                         </div>
-                    {/foreach}
+                        {/foreach}
                 </div>
             </div>
 

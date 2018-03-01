@@ -110,17 +110,19 @@ function obtenerRazaBy($especie_id) {
 
 function obtenerPublicacionesParaIndex() {
     $cn = getConexion();
-    $cn->consulta("select * from publicaciones");
+    $cn->consulta("select * from publicaciones where abierto=:abierto", array(array('abierto', 1, 'bool')));
+    
     $resultados = $cn->restantesRegistros();
     $tipo = 3;
+    $abierto = 7;
     foreach ($resultados as $key => $valor) {
        if(($valor[$tipo]) === "E"){
            $resultados[$key]["tipo"] = "Encontrado";
        }else if(($valor[$tipo]) === "P"){
             $resultados[$key]["tipo"] = "Perdido";
         }
-    $resultados[$key]["descripcion"] =   substr($resultados[$key]["descripcion"], 0, 150) . "..."; 
-        
+        $resultados[$key]["descripcion"] =   substr($resultados[$key]["descripcion"], 0, 150) . "..."; 
+
     }
     return $resultados;
 }
