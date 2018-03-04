@@ -69,12 +69,12 @@
                                 <div class="col-3">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked> Encontrado
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="E" checked> Encontrado
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"> Perdido
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="P"> Perdido
                                         </label>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
 
                             <!-- Description -->
                             <h3>Descripción:</h3>
-                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                            <textarea class="form-control" id="exampleTextarea" name="descripcion"rows="3"></textarea>
                             <hr>
 
                             <!-- Pictures -->

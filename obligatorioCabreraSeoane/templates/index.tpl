@@ -19,6 +19,7 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/functions.js" type="text/javascript"></script>
+        <script src="js/functionsPublish.js" type="text/javascript"></script>
 
     </head>
 
@@ -59,13 +60,9 @@
                             </select>
                         </div>
                         <div class="col">
-                            <select class="custom-select" name="razas">
-                                <option value='' selected>Raza</option>
-                                {foreach from=$razas item=raza}
-                                    <option value="{$raza.id}">{$raza.nombre}</option>
-                                {/foreach}
-
-                            </select>
+                                    <select class="custom-select" name="razas" id="razas">
+                                        <option value=' '>Raza</option>
+                                    </select>
                         </div>
                         <div class="col">
                             <select class="custom-select" name="barrio">
@@ -135,7 +132,7 @@
                         {foreach from=$publicaciones item=pub}
                         <div class="col">
                             <div class="card" style="width: 20rem;">
-                                <div class="not-found card-header">{$pub.tipo}</div>
+                                <div {if $pub.tipo=="Perdido"} class="not-found card-header" {/if} {if $pub.tipo=="Encontrado"} class="found card-header" {/if}>{$pub.tipo}</div>
                                 <img class="card-img-top" src="https://html.com/wp-content/uploads/very-large-flamingo.jpg" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">{$pub.titulo}</h5>
@@ -149,7 +146,15 @@
                         {/foreach}
                 </div>
             </div>
-
+                
+        </ul>
+        <ul id="paginacion">
+            {foreach from=$paginacion item=valor}
+            <li>
+                <a href="?p={$valor.p}" alt="{$valor.p}" {if $valor.sel} class="sel" {/if}>{$valor.texto}</a>
+            </li>
+            {/foreach}
+        </ul>
     </body>
 
 </html>
