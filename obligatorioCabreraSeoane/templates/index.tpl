@@ -40,14 +40,14 @@
 
                         <div class="col-2">
 
-                        <div class="col">
-                            <select class="custom-select" name="estado" id="estado">
-                                <option value='' selected>Estado</option>
-                                <option value="1"> Encontrado</option>
-                               <option value="2"> Perdido</option>
+                            <div class="col">
+                                <select class="custom-select" name="estado" id="estado">
+                                    <option value='' selected>Estado</option>
+                                    <option value="1"> Encontrado</option>
+                                    <option value="2"> Perdido</option>
 
-                            </select>
-                        </div>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="col">
@@ -60,9 +60,9 @@
                             </select>
                         </div>
                         <div class="col">
-                                    <select class="custom-select" name="razas" id="razas">
-                                        <option value=' '>Raza</option>
-                                    </select>
+                            <select class="custom-select" name="razas" id="razas">
+                                <option value=' '>Raza</option>
+                            </select>
                         </div>
                         <div class="col">
                             <select class="custom-select" name="barrio">
@@ -98,38 +98,11 @@
 
 
 
-            <div class="pagination d-flex justify-content-center sticky-top">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            {include file="pagination.tpl"}
 
-            <div id="publicaciones">
-                
-                    <div class="row">
-                        {foreach from=$publicaciones item=pub}
+            <div id="publicaciones">                
+                <div class="row">
+                    {foreach from=$publicaciones item=pub}
                         <div class="col">
                             <div class="card" style="width: 20rem;">
                                 <div {if $pub.tipo=="Perdido"} class="not-found card-header" {/if} {if $pub.tipo=="Encontrado"} class="found card-header" {/if}>{$pub.tipo}</div>
@@ -143,18 +116,11 @@
                             </div>
 
                         </div>
-                        {/foreach}
+                    {/foreach}
                 </div>
             </div>
-                
+
         </ul>
-        <ul id="paginacion">
-            {foreach from=$paginacion item=valor}
-            <li>
-                <a href="?p={$valor.p}" alt="{$valor.p}" {if $valor.sel} class="sel" {/if}>{$valor.texto}</a>
-            </li>
-            {/foreach}
-        </ul>
-    </body>
+</body>
 
 </html>

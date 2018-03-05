@@ -110,11 +110,10 @@ function obtenerRazaBy($especie_id) {
 
 function obtenerPublicacionesParaIndex() {
     $cn = getConexion();
-    $cn->consulta("select * from publicaciones where id < 15 and abierto=:abierto", array(array('abierto', 1, 'bool')));
+    $cn->consulta("select * from publicaciones where abierto=1 limit 0, 10");
 
     $resultados = $cn->restantesRegistros();
     $tipo = 3;
-    $abierto = 7;
     foreach ($resultados as $key => $valor) {
         if (($valor[$tipo]) === "E") {
             $resultados[$key]["tipo"] = "Encontrado";
@@ -126,3 +125,11 @@ function obtenerPublicacionesParaIndex() {
     return $resultados;
 }
 
+function getCantTotalPublicacionesAbiertas(){
+    $cn = getConexion();
+    $cn->consulta("select count(*) from publicaciones where abierto=1");
+
+    $resultado = $cn->restantesRegistros();
+    return $resultado;
+    
+}
