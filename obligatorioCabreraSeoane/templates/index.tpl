@@ -43,8 +43,8 @@
                             <div class="col">
                                 <select class="custom-select" name="estado" id="estado">
                                     <option value='' selected>Estado</option>
-                                    <option value="1"> Encontrado</option>
-                                    <option value="2"> Perdido</option>
+                                    <option value='E'> Encontrado</option>
+                                    <option value='P'> Perdido</option>
 
                                 </select>
                             </div>
@@ -61,11 +61,11 @@
                         </div>
                         <div class="col">
                             <select class="custom-select" name="razas" id="razas">
-                                <option value=' '>Raza</option>
+                                <option value=''>Raza</option>
                             </select>
                         </div>
                         <div class="col">
-                            <select class="custom-select" name="barrio">
+                            <select class="custom-select" name="barrio"  id="barrio">
                                 <option value='' selected>Barrio</option>
                                 {foreach from=$barrios item=barrio}
                                     <option value="{$barrio.id}">{$barrio.nombre}</option>
@@ -80,8 +80,8 @@
                         <div class="col-5">
                             <div class="input-group">
                                 <span class="fa fa-search input-group-addon" id="basic-addon1"> </span>
-                                <input type="text" class="form-control" placeholder="Ingrese texto a buscar..." aria-describedby="basic-addon1">
-                                <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                                <input type="text" class="form-control" placeholder="Ingrese texto a buscar..." aria-describedby="basic-addon1" id="palabra">
+                                <button class="btn btn-success my-2 my-sm-0" id="botonBuscar">Buscar</button>
                             </div>
                             <div class="col-2 d-flex flex-row-reverse">
 

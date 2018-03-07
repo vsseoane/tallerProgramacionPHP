@@ -1,24 +1,26 @@
 $(document).ready(inicializo);
-
+var estado = " ";
+var especie = " ";
+var raza = " ";
+var barrio = " ";
+var palabra = " ";
 function inicializo() {
+    $("#botonBuscar").click(cargarDatos);
     comportamientoBotones();
     $("#especie").change(function () {
         console.log($(this));
         cargarEspecie($(this).val());
     });
-
     $("#razas").change(function () {
         $("#resultado").html($(this).val());
     });
-    /*  $("#especie").change(llenarRazas);*/
-
 }
 
 function llenarRazas() {
     var especie_id = $("#especie").val();
-
 }
 function cargarEspecie(especie) {
+
     $.ajax({
         url: "especies.php",
         dataType: "json",
@@ -30,66 +32,53 @@ function cargarEspecie(especie) {
         }
     }).done(function (data) {
         var select = $("#razas").empty();
-
         select.append("<option value=''> -- Seleccione una raza -- </option>");
-
         for (var i = 0; i < data.length; i++) {
             var option = $("<option />");
             option.attr("value", data[i].id);
             option.html(data[i].nombre);
             select.append(option);
         }
-
-        // $(cargandoDialog).dialog( "close" );
-
-        // $("#resultado").html( select.val() );
     });
-
-
 }
 
 
 function comportamientoBotones() {
-   /* $("#paginacion a").click(function (e) {
-        e.preventDefault();
 
-        cambiarPagina($(this).attr("alt"));
-    });*/
-    
-        $("#paginacion #numeros").click(function (e) {
+    $("#paginacion #numeros").click(function (e) {
         e.preventDefault();
-
-        cambiarPagina($(this).attr("alt"));
+        cambiarPagina($(this).attr("alt"), estado, especie, raza, barrio, palabra);
     });
 }
 
-//  var pagina = {$p};
-function cambiarPagina(p) {
+function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
+    console.log("palabras? " + palabra);
     $.ajax({
         url: "obtenerElementos.php",
         dataType: "json",
         type: "POST",
-        data: "accion=ajax&p=" + p,
+        data: "accion=ajax&especie=" + especie + "&p=" + p + "&estado=" + estado + "&raza=" + raza + "&barrio=" + barrio + "&palabra=" + palabra,
         timeout: 2000,
         beforeSend: function () {
         }
-    }).done(function (data) {
-
+    }).done(function (arr) {
+        console.log("volviendo de obtenerElementos cantTotalDeLaConsylta es " +arr );
+        comportamientoBotones();
+        var data = arr['data'];
+        var cantTotalDeLaConsulta= arr['cantTotal'];
 
         var divPublicaciones = $("#publicaciones").empty();
-
         var divRow = $("<div />").addClass("row");
-
         for (var i = 0; i < data.length; i++) {
             var dirCol = $("<div />").addClass("col");
             var divCard = $("<div />").addClass("card");
             divCard.attr("style", "width: 20rem;");
             var divTipo = $("<div />");
-            if(data[i].tipo === "P"){
+            if (data[i].tipo === "P") {
                 divTipo.html("Perdido");
                 divTipo.addClass("not-found card-header");
             }
-            if(data[i].tipo === "E"){
+            if (data[i].tipo === "E") {
                 divTipo.html("Encontrado");
                 divTipo.addClass("found card-header");
             }
@@ -100,25 +89,94 @@ function cambiarPagina(p) {
             var h5Titulo = $("<h5 />").addClass("card-title").html(data[i].titulo);
             var pTag = $("<p />").addClass("card-text").html(data[i].descripcion.substring(0, 150) + "...");
             var aTag = $("<a />").addClass("btn btn-primary").html("Ver Detalles").attr("href", "#");
-
             divCardBody.append(h5Titulo);
             divCardBody.append(pTag);
             divCardBody.append(aTag);
-
             divCard.append(divTipo);
             divCard.append(imgTag);
             divCard.append(divCardBody);
-            
             dirCol.append(divCard);
-            
             divRow.append(dirCol);
-
-           
         }
-         divPublicaciones.append(divRow);
+        divPublicaciones.append(divRow);
+        //recalcular paginado
 
-    });
+        var cantResultados = cantTotalDeLaConsulta;
+        var cantPaginas = Math.round(cantResultados / 10);
+        if ((cantResultados % 10) != 0) {
+            cantPaginas++;
+        }
 
+        console.log("cantResultados en bd: " + cantResultados);
+        console.log("cantPaginas > " + cantPaginas);
+        var divPaginacion = $("#paginacion").empty();
+        divPaginacion.attr("id","paginacion");
+        var nav = $("<nav />").attr("aria-label", "Page navigation example");
+        var ul = $("<ul />").addClass("pagination");
+        var liPageItem = $("<li />").addClass("page-item");
+        var aPageLink = $("<a />").addClass("page-link").attr("href", "#").attr("aria-label", "Previous");
+        var spanAriaHidden = $("<span />").attr("aria-hidden", "true").html("&laquo;");
+        var spanSrOnly = $("<span />").addClass("sr-only").html("Previous");
+                aPageLink.append(spanAriaHidden);
+        aPageLink.append(spanSrOnly);
+        liPageItem.append(aPageLink);
+        
+         ul.append(liPageItem);
+        for (var i = 1; i <= cantPaginas; i++) {
+            var liPageItemFor = $("<li />").addClass("page-item");
+            var aNumeros = $("<a />").addClass("page-link").attr("href", "?p=" + i).attr("alt", i).attr("id","numeros").html(i);
+            liPageItemFor.append(aNumeros);
+            ul.append(liPageItemFor);
+            
+        }
+        var liPageItem2 = $("<li />").addClass("page-item");
+        var aPageLink2 = $("<a />").addClass("page-link").attr("href", "#").attr("aria-label", "Next");
+        var spanAriaHidden2 = $("<span />").attr("aria-hidden", "true").html("&raquo;");
+        var spanSrOnly2 = $("<span />").addClass("sr-only").html("Next");
+        
+
+
+
+        aPageLink2.append(spanAriaHidden2);
+        aPageLink2.append(spanSrOnly2);
+        liPageItem2.append(aPageLink2);
+
+       
+        
+        ul.append(liPageItem2);
+
+        nav.append(ul);
+        divPaginacion.append(nav);
+        comportamientoBotones();
+
+    }
+
+
+
+
+    );
 }
 
-           
+function cargarDatos() {
+    estado = $("#estado").val();
+    if (estado === '') {
+        estado = " ";
+    }
+    especie = $("#especie").val();
+    if (especie === '') {
+        especie = " ";
+    }
+    raza = $("#razas").val();
+    if (raza === '') {
+        raza = " ";
+    }
+    barrio = $("#barrio").val();
+    if (barrio === '') {
+        barrio = " ";
+    }
+    palabra = $("#palabra").val();
+    if (palabra === '') {
+        palabra = " ";
+    }
+    cambiarPagina(1, estado, especie, raza, barrio, palabra);
+}
