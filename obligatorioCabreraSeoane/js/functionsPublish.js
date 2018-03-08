@@ -62,7 +62,6 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
         beforeSend: function () {
         }
     }).done(function (arr) {
-        console.log("volviendo de obtenerElementos cantTotalDeLaConsylta es " +arr );
         comportamientoBotones();
         var data = arr['data'];
         var cantTotalDeLaConsulta= arr['cantTotal'];
@@ -102,7 +101,8 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
         //recalcular paginado
 
         var cantResultados = cantTotalDeLaConsulta;
-        var cantPaginas = Math.round(cantResultados / 10);
+        var cantPaginas = Math.floor(cantResultados / 10);
+        console.log("cantPaginas dividido 10 > " + cantPaginas);
         if ((cantResultados % 10) != 0) {
             cantPaginas++;
         }
