@@ -121,6 +121,7 @@
             </div>
 
         </ul>
+           <h1>pdf proando <a target="_blank" href="generarPDF.php">  descargar </a></h1>
 </body>
 
 </html>
