@@ -48,6 +48,36 @@ class PDF extends FPDF {
             $usuario = ConseguirUsuariosPorID($usuarioID);
             $this->MultiCell(125, 4, utf8_decode($usuario), 0, 'L', 0);
             $this->Ln();
+            $dir = "fotos/1/";
+
+            if (is_dir($dir)) {
+                $d = dir($dir);
+                $iBefore = $this->GetY() + 5;
+                $i = $iBefore;
+                $xBefore = $this->GetX() + 5;
+                $x = $xBefore;
+                $cont = 0;
+                while (false !== ($file = $d->read())) {
+
+                    if ($file != "." && $file != "..") {
+
+                        $this->Image($dir . $file, $x, $i, 0, 40);
+                        $this->Ln();
+                        $x += 60;
+                        $cont++;
+                        if (($cont % 2 == 0) && ($cont % 6 != 0)) {
+                            $x -= 120;
+                            $i += 60;
+                        }
+                        if ($cont % 6 == 0) {
+                            $this->AddPage();
+                            $x = 10;
+                            $i = 10;
+                        }
+                    }
+                }
+                $d->close();
+            }
             return $this;
         }
     }
