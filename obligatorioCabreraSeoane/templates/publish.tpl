@@ -36,8 +36,19 @@
                     <label>Publique un anuncio con los datos de su mascota.</label>
                 </div>
                 <div class="card-body">
-                    <form class="form-signin" method="post" action="doPublish.php" id="formPublish">
+                    <form class="form-signin" method="post" action="doPublish.php" id="formPublish" enctype="multipart/form-data">
                         <div class="container">
+
+                            <!-- Titulo -->
+                            <h3>Título:</h3>
+                            <textarea class="form-control" id="titulo" rows="2" name="titulo" ></textarea>
+                            <hr>
+
+                            <!-- Descripcion -->
+                            <h3>Descripción:</h3>
+                            <textarea class="form-control" id="descripcion" rows="3" name="descripcion"></textarea>
+                            <hr>
+
                             <h3>Datos: </h3>
                             <div class="row justify-content-center">
                                 <div class="col-3">
@@ -69,74 +80,44 @@
                                 <div class="col-3">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="E" checked> Encontrado
+                                            <input class="form-check-input" type="radio" name="estado" id="gridEstado1" value="E" checked> Encontrado
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="P"> Perdido
+                                            <input class="form-check-input" type="radio" name="estado" id="gridEstado2" value="P"> Perdido
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <hr>
 
-                            <!-- Description -->
-                            <h3>Descripción:</h3>
-                            <textarea class="form-control" id="exampleTextarea" name="descripcion"rows="3"></textarea>
-                            <hr>
-
                             <!-- Pictures -->
                             <h3>Fotos:</h3>
 
-                            <label class="custom-file">
-                                <input type="file" id="file" class="custom-file-input" lang="es">
-                                <span class="custom-file-control"></span>
-                            </label>
-                            <br>
                             <br>
                             <div class="container">
 
+                                <input type="file" name="archivo_1" class="ultimoFile" accept=".gif,.jpg,.jpeg,.png"/>
 
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre del archivo</th>
-                                            <th>Foto</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>foto.jpg</td>
-                                            <td>Doe</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>foto2.jpg</td>
-                                            <td>Moe</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                <button type="button" id="otraFoto"> Seleccionar otra foto </button>
 
-                                    </tbody>
-                                </table>
+                              <!--  <input type="hidden" name="publicacionId" value="{$publicacionId}" />-->
+                                <input type="hidden" name="publicacionId" value="" />
+                                <input type="hidden" name="accion" value="subir" />
+
+
                             </div>
 
                             <hr>
 
                             <!-- Map -->
                             <h3>Ubicacion exacta:</h3>
-                            <label>(Opcional)</label>
+                            <label>(Opcional)</label>                      
 
                             <div id="map-publish"> </div>
+                            <input type="hidden" id = "latitud" name="latitud" value="-34.901112" />
+                            <input type="hidden" id= "longitud" name="longitud" value="-56.164532" />
 
                             <hr>
 

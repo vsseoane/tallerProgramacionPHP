@@ -7,6 +7,8 @@ var palabra = " ";
 var palabra = " ";
 var cantPagTotal = 10;
 function inicializo() {
+    var contador = 2;
+
     $("#botonBuscar").click(cargarDatos);
     comportamientoBotones();
     $("#especie").change(function () {
@@ -16,6 +18,13 @@ function inicializo() {
     $("#razas").change(function () {
         $("#resultado").html($(this).val());
     });
+      $('#razas').prop('disabled', true);
+        $("#otraFoto").click(function () {
+        var input = $("<input />").attr("type", "file");
+        input.attr("name", "archivo_" + contador++);
+        $("input.ultimoFile").after(input).removeClass("ultimoFile").css("display", "block");
+        input.addClass("ultimoFile");
+    }); 
     $("#cantPagTotal").click(cambiarCantidadPaginacion);
 }
 
@@ -23,7 +32,6 @@ function llenarRazas() {
     var especie_id = $("#especie").val();
 }
 function cargarEspecie(especie) {
-
     $.ajax({
         url: "especies.php",
         dataType: "json",
@@ -32,10 +40,16 @@ function cargarEspecie(especie) {
         timeout: 2000,
         beforeSend: function () {
             //   cargando();
+            $('#razas').prop('disabled', true);
         }
     }).done(function (data) {
+
+        $('#razas').prop('disabled', false);
+
         var select = $("#razas").empty();
-        select.append("<option value=''> -- Seleccione una raza -- </option>");
+
+        select.append("<option value=''> Seleccione una Raza </option>");
+
         for (var i = 0; i < data.length; i++) {
             var option = $("<option />");
             option.attr("value", data[i].id);

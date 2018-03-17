@@ -36,7 +36,7 @@
 
 
 
-                    <div class="row justify-content-start">
+                    <div class="row justify-content-center">
 
                         <div class="col-2">
 
@@ -123,7 +123,7 @@
                                     <h5 class="card-title">{$pub.titulo}</h5>
                                     <p class="card-text">{$pub.descripcion}
                                     </p>
-                                    <a href="#" class="btn btn-primary">Ver Detalles</a>
+                                    <a href="./detallePublicacion.php?id={$pub.id}" class="btn btn-primary">Ver Detalles</a>
                                 </div>
                             </div>
 

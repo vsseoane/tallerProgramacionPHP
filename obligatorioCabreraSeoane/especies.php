@@ -22,8 +22,7 @@ if($accion == "ajax" && strlen($especie)){
     $res = $conn->restantesRegistros();
     
     $conn->desconectar();
-    sleep(1);
-    echo json_encode($res);
+     echo json_encode($res);
 } else {
     $conn->conectar();
     
