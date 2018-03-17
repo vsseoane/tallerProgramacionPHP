@@ -4,6 +4,8 @@ var especie = " ";
 var raza = " ";
 var barrio = " ";
 var palabra = " ";
+var palabra = " ";
+var cantPagTotal = 10;
 function inicializo() {
     $("#botonBuscar").click(cargarDatos);
     comportamientoBotones();
@@ -14,6 +16,7 @@ function inicializo() {
     $("#razas").change(function () {
         $("#resultado").html($(this).val());
     });
+    $("#cantPagTotal").click(cambiarCantidadPaginacion);
 }
 
 function llenarRazas() {
@@ -47,17 +50,17 @@ function comportamientoBotones() {
 
     $("#paginacion #numeros").click(function (e) {
         e.preventDefault();
-        cambiarPagina($(this).attr("alt"), estado, especie, raza, barrio, palabra);
+        cambiarPagina($(this).attr("alt"), estado, especie, raza, barrio, palabra, cantPagTotal);
     });
 }
 
-function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
-    console.log("palabras? " + palabra);
+function cambiarPagina(p, estado, especie, raza, barrio, palabra, cantPagTotal) {
+     console.log("cantPagTotal? " + cantPagTotal);
     $.ajax({
         url: "obtenerElementos.php",
         dataType: "json",
         type: "POST",
-        data: "accion=ajax&especie=" + especie + "&p=" + p + "&estado=" + estado + "&raza=" + raza + "&barrio=" + barrio + "&palabra=" + palabra,
+        data: "accion=ajax&especie=" + especie + "&p=" + p + "&estado=" + estado + "&raza=" + raza + "&barrio=" + barrio + "&palabra=" + palabra + "&cantPagTotal=" + cantPagTotal,
         timeout: 2000,
         beforeSend: function () {
         }
@@ -99,14 +102,13 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
         }
         divPublicaciones.append(divRow);
         //recalcular paginado
-
-        var cantResultados = cantTotalDeLaConsulta;
-        var cantPaginas = Math.floor(cantResultados / 10);
+  var cantResultados = cantTotalDeLaConsulta;
+        var cantPaginas = Math.floor(cantResultados / cantPagTotal);
         console.log("cantPaginas dividido 10 > " + cantPaginas);
-        if ((cantResultados % 10) != 0) {
+        if ((cantResultados % cantPagTotal) != 0) {
             cantPaginas++;
         }
-
+       
         console.log("cantResultados en bd: " + cantResultados);
         console.log("cantPaginas > " + cantPaginas);
         var divPaginacion = $("#paginacion").empty();
@@ -179,4 +181,10 @@ function cargarDatos() {
         palabra = " ";
     }
     cambiarPagina(1, estado, especie, raza, barrio, palabra);
+}
+
+function cambiarCantidadPaginacion() {
+    cantPagTotal = $("#cantPag").val();
+    cambiarPagina(1, estado, especie, raza, barrio, palabra, cantPagTotal);
+
 }

@@ -15,6 +15,7 @@ $especie = strlen($_POST["especie"]) ? $_POST["especie"] : $_GET["especie"];
 $raza = strlen($_POST["raza"]) ? $_POST["raza"] : $_GET["raza"];
 $barrio = strlen($_POST["barrio"]) ? $_POST["barrio"] : $_GET["barrio"];
 $palabra = strlen($_POST["palabra"]) ? $_POST["palabra"] : $_GET["palabra"];
+$elementosPorPagina = (int) (strlen($_POST["cantPagTotal"]) ? $_POST["cantPagTotal"] : $_GET["cantPagTotal"]);
 
 if ($pagina < 1)
     $pagina = 1;

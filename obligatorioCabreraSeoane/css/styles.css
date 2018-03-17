@@ -62,3 +62,9 @@ body{
         height: 350px;
         width: 90%;
     }
+    
+    .cantPag{
+        margin: 20px !important;
+        margin-left: 30px;
+        
+    }
