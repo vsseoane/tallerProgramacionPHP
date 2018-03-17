@@ -98,7 +98,7 @@
                             <br>
                             <div class="container">
 
-                                <input type="file" name="archivo_1" class="ultimoFile" accept=".gif,.jpg,.jpeg,.png"/>
+                                <input type="file" name="archivo_1" class="ultimoFile" accept=".jpg,.jpeg"/>
 
                                 <button type="button" id="otraFoto"> Seleccionar otra foto </button>
 

@@ -118,12 +118,12 @@
                         <div class="col">
                             <div class="card" style="width: 20rem;">
                                 <div {if $pub.tipo=="Perdido"} class="not-found card-header" {/if} {if $pub.tipo=="Encontrado"} class="found card-header" {/if}>{$pub.tipo}</div>
-                                <img class="card-img-top" src="https://html.com/wp-content/uploads/very-large-flamingo.jpg" alt="Card image cap">
+                                <img class="card-img-top" src="fotos/{$pub.id}/1.jpg" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">{$pub.titulo}</h5>
+                                    <a class="card-title" href="./detallePublicacion.php?id={$pub.id}" target="_blank" >{$pub.titulo}</a>
                                     <p class="card-text">{$pub.descripcion}
                                     </p>
-                                    <a href="./detallePublicacion.php?id={$pub.id}" class="btn btn-primary">Ver Detalles</a>
+                                    <a href="./detallePublicacion.php?id={$pub.id}" class="btn btn-primary" target="_blank" >Ver Detalles</a>
                                 </div>
                             </div>
 
@@ -133,7 +133,6 @@
             </div>
 
         </ul>
-           <h1>pdf proando <a target="_blank" href="generarPDF.php">  descargar </a></h1>
 </body>
 
 </html>

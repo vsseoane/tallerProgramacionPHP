@@ -26,11 +26,11 @@ if (!is_dir($dir)) {
 }
 
 $mensaje = "";
-$extensionesPermitidas = array("image/png", "image/jpg", "image/jpeg", "image/gif" );
-
+$extensionesPermitidas = array("image/jpg", "image/jpeg" );
+$cont = 1;
 while (list($clave, $file) = each($_FILES)) {
 
-    $nombre = $file["name"];
+    $nombre = $cont . ".jpg";// $file["name"];
 
     $tipoImagen = $file["type"];
 
@@ -44,9 +44,10 @@ while (list($clave, $file) = each($_FILES)) {
             $mensaje .= "<br />Error: " . $_FILES["archivo"]["error"];
         }
     }
+    $cont++;
     
 }
-
+$cont = 1;
 
 $smarty = getSmarty();
 $smarty->assign("especies", obtenerEspecies());

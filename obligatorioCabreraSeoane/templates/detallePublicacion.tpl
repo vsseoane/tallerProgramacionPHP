@@ -119,8 +119,8 @@
                 <div class="card-header">
 
                     <h4>Detalle de Publicación</h4>
-                    <label>Información detallada de la publicafción seleccionada. </label>
-
+                    <label>Información detallada de la publicación seleccionada. </label>
+                     <a target="_blank" href="generarPDF.php?id={$publicacion.id}">  Descargar PDF </a>
                 </div>
 
                 <div class="card-body">
@@ -225,8 +225,12 @@
                             </div>
 
                             <input type="hidden" name="pubIdPreguntar" value="{$publicacion.id}" />
-
-                            <button type="submit" class="btn btn-secondary">Preguntar</button>
+                            {if $usuarioLogueado.id != ""}
+                                <button type="submit" class="btn btn-secondary">Preguntar</button>
+                            {/if}
+                            {if $usuarioLogueado.id == ""}
+                                <a href="login.php" >Para hacer una pregunta debe loguearse</a>
+                            {/if}
                         </form>
                         <br>
 

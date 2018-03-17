@@ -98,13 +98,16 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra, cantPagTotal) 
                 divTipo.html("Encontrado");
                 divTipo.addClass("found card-header");
             }
-            var imgTag = $("<img>").addClass("card-img-top");
-            imgTag.attr("src", "https://html.com/wp-content/uploads/very-large-flamingo.jpg");
+            var imgTag = $("<img>").addClass("card-img-top"); 
+            imgTag.attr("src", "fotos/" + data[i].id+ "/1.jpg");
             imgTag.attr("alt", "Card image cap");
             var divCardBody = $("<div />").addClass("card-body");
-            var h5Titulo = $("<h5 />").addClass("card-title").html(data[i].titulo);
+            var h5Titulo = $("<a />").addClass("card-title").html(data[i].titulo);
+            h5Titulo.attr("target","_blank");
+            h5Titulo.attr("href", "./detallePublicacion.php?id=" + data[i].id );
             var pTag = $("<p />").addClass("card-text").html(data[i].descripcion.substring(0, 150) + "...");
-            var aTag = $("<a />").addClass("btn btn-primary").html("Ver Detalles").attr("href", "#");
+            var aTag = $("<a />").addClass("btn btn-primary").html("Ver Detalles").attr("href", "./detallePublicacion.php?id=" + data[i].id );
+            aTag.attr("target","_blank");
             divCardBody.append(h5Titulo);
             divCardBody.append(pTag);
             divCardBody.append(aTag);
@@ -194,7 +197,7 @@ function cargarDatos() {
     if (palabra === '') {
         palabra = " ";
     }
-    cambiarPagina(1, estado, especie, raza, barrio, palabra);
+    cambiarPagina(1, estado, especie, raza, barrio, palabra, cantPagTotal);
 }
 
 function cambiarCantidadPaginacion() {

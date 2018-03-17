@@ -3,11 +3,11 @@
 include_once 'utils.php';
 
 require('includes/libs/fpdf.php');
-
+$pubId = $_GET['id'];
 class PDF extends FPDF {
 
 // Tabla coloreada
-    function LlenarElPDF($data) {
+    function LlenarElPDF($data,$pubId) {
 
         foreach ($data as $row) {
             $this->Cell(50, 6, 'Titulo:', 0, 0, 'L');
@@ -48,7 +48,7 @@ class PDF extends FPDF {
             $usuario = ConseguirUsuariosPorID($usuarioID);
             $this->MultiCell(125, 4, utf8_decode($usuario), 0, 'L', 0);
             $this->Ln();
-            $dir = "fotos/1/";
+            $dir = "fotos/" . $pubId . "/";
 
             if (is_dir($dir)) {
                 $d = dir($dir);
@@ -120,7 +120,7 @@ $pdf = new PDF();
 
 $conn = getConexion();
 
-$conn->consulta("select titulo, descripcion , tipo , especie_id, raza_id, barrio_id, abierto, usuario_id , exitoso , id ,  count(*) as cantPublicaciones from publicaciones where id=1");
+$conn->consulta("select titulo, descripcion , tipo , especie_id, raza_id, barrio_id, abierto, usuario_id , exitoso , id ,  count(*) as cantPublicaciones from publicaciones where id= :idPub", array(array("idPub", $pubId, 'string')));
 
 
 
@@ -131,6 +131,6 @@ $conn->desconectar();
 
 $pdf->SetFont('Arial', '', 14);
 $pdf->AddPage();
-$pdf->LlenarElPDF($data);
+$pdf->LlenarElPDF($data,$pubId);
 $pdf->Output();
 ?>
