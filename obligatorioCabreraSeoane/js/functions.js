@@ -11,13 +11,13 @@ function placeMarker(position, map) {
             position: position,
             map: map
         });
-    }else{
+    } else {
         //marker.setMap(null);
 
         marker.setPosition(position);
         marker.setMap(map);
     }
-    
+
     map.panTo(position);
 }
 
@@ -30,19 +30,19 @@ function getLocation() {
 }
 function onSuccess(position) {
     debugger;
-    if(position != null){
-        uluru = { lat: position.coords.latitude, lng: position.coords.longitude };
-    }   
+    if (position != null) {
+        uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
+    }
 }
 
 function initMap() {
 
     getLocation();
 
-    if(uluru == null ){
+    if (uluru == null) {
         // Center Montevideo position if actual position can not be obtained
         zoom = 12;
-        uluru = { lat: -34.901112, lng: -56.164532 };
+        uluru = {lat: -34.901112, lng: -56.164532};
     }
 
     var map = new google.maps.Map(document.getElementById('map-publish'), {
@@ -50,9 +50,9 @@ function initMap() {
         center: uluru
     });
     /*var marker = new google.maps.Marker({
-      position: uluru,
-      map: map
-    });*/
+     position: uluru,
+     map: map
+     });*/
 
     map.addListener('click', function (e) {
         placeMarker(e.latLng, map);

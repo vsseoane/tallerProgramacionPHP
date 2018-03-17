@@ -92,7 +92,19 @@
 
 
                     </div>
+                                
                 </div>
+                                <div class="cantPag" name="cantPagTotal" id="cantPagTotal">
+                    <select class="custom-select" name="cantPag" id="cantPag">
+                        <option value='10' selected>10</option>
+                        <option value='20'> 20</option>
+                        <option value='50'> 50</option>
+                        <option value='T'> Todos </option>
+
+                    </select>
+                </div>
+                                
+                                
             </div>
 
 

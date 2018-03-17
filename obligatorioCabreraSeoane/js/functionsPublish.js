@@ -4,7 +4,11 @@ var especie = " ";
 var raza = " ";
 var barrio = " ";
 var palabra = " ";
+var palabra = " ";
+var cantPagTotal = 10;
 function inicializo() {
+    var contador = 2;
+
     $("#botonBuscar").click(cargarDatos);
     comportamientoBotones();
     $("#especie").change(function () {
@@ -14,54 +18,19 @@ function inicializo() {
     $("#razas").change(function () {
         $("#resultado").html($(this).val());
     });
-}
-
-function inicializo() {
-
-    var contador = 2;
-
-    $("#especie").change(function () {
-        console.log($(this));
-        cargarEspecie($(this).val());
-    });
-
-    $("#razas").change(function () {
-        $("#resultado").html($(this).val());
-    });
-
-    $('#razas').prop('disabled', true);
-
-    $("#otraFoto").click(function () {
+      $('#razas').prop('disabled', true);
+        $("#otraFoto").click(function () {
         var input = $("<input />").attr("type", "file");
         input.attr("name", "archivo_" + contador++);
         $("input.ultimoFile").after(input).removeClass("ultimoFile").css("display", "block");
         input.addClass("ultimoFile");
-    });
-
-}
-function cargarEspecie(especie) {
-
-    $.ajax({
-        url: "especies.php",
-        dataType: "json",
-        type: "POST",
-        data: "accion=ajax&especie=" + especie,
-        timeout: 2000,
-        beforeSend: function () {
-            //   cargando();
-        }
-    }).done(function (data) {
-        var select = $("#razas").empty();
-        select.append("<option value=''> -- Seleccione una raza -- </option>");
-        for (var i = 0; i < data.length; i++) {
-            var option = $("<option />");
-            option.attr("value", data[i].id);
-            option.html(data[i].nombre);
-            select.append(option);
-        }
-    });
+    }); 
+    $("#cantPagTotal").click(cambiarCantidadPaginacion);
 }
 
+function llenarRazas() {
+    var especie_id = $("#especie").val();
+}
 function cargarEspecie(especie) {
     $.ajax({
         url: "especies.php",
@@ -87,32 +56,25 @@ function cargarEspecie(especie) {
             option.html(data[i].nombre);
             select.append(option);
         }
-
-        // $(cargandoDialog).dialog( "close" );
-
-        // $("#resultado").html( select.val() );
     });
-
-
 }
 
-var cargandoDialog = null;
-            
+
 function comportamientoBotones() {
 
     $("#paginacion #numeros").click(function (e) {
         e.preventDefault();
-        cambiarPagina($(this).attr("alt"), estado, especie, raza, barrio, palabra);
+        cambiarPagina($(this).attr("alt"), estado, especie, raza, barrio, palabra, cantPagTotal);
     });
 }
 
-function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
-    console.log("palabras? " + palabra);
+function cambiarPagina(p, estado, especie, raza, barrio, palabra, cantPagTotal) {
+     console.log("cantPagTotal? " + cantPagTotal);
     $.ajax({
         url: "obtenerElementos.php",
         dataType: "json",
         type: "POST",
-        data: "accion=ajax&especie=" + especie + "&p=" + p + "&estado=" + estado + "&raza=" + raza + "&barrio=" + barrio + "&palabra=" + palabra,
+        data: "accion=ajax&especie=" + especie + "&p=" + p + "&estado=" + estado + "&raza=" + raza + "&barrio=" + barrio + "&palabra=" + palabra + "&cantPagTotal=" + cantPagTotal,
         timeout: 2000,
         beforeSend: function () {
         }
@@ -154,14 +116,13 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
         }
         divPublicaciones.append(divRow);
         //recalcular paginado
-
-        var cantResultados = cantTotalDeLaConsulta;
-        var cantPaginas = Math.floor(cantResultados / 10);
+  var cantResultados = cantTotalDeLaConsulta;
+        var cantPaginas = Math.floor(cantResultados / cantPagTotal);
         console.log("cantPaginas dividido 10 > " + cantPaginas);
-        if ((cantResultados % 10) != 0) {
+        if ((cantResultados % cantPagTotal) != 0) {
             cantPaginas++;
         }
-
+       
         console.log("cantResultados en bd: " + cantResultados);
         console.log("cantPaginas > " + cantPaginas);
         var divPaginacion = $("#paginacion").empty();
@@ -187,12 +148,17 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
         var liPageItem2 = $("<li />").addClass("page-item");
         var aPageLink2 = $("<a />").addClass("page-link").attr("href", "#").attr("aria-label", "Next");
         var spanAriaHidden2 = $("<span />").attr("aria-hidden", "true").html("&raquo;");
-        var spanSrOnly2 = $("<span />").addClass("sr-only").html("Next");       
+        var spanSrOnly2 = $("<span />").addClass("sr-only").html("Next");
+        
+
+
 
         aPageLink2.append(spanAriaHidden2);
         aPageLink2.append(spanSrOnly2);
         liPageItem2.append(aPageLink2);
-              
+
+       
+        
         ul.append(liPageItem2);
 
         nav.append(ul);
@@ -200,6 +166,9 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra) {
         comportamientoBotones();
 
     }
+
+
+
 
     );
 }
@@ -226,4 +195,10 @@ function cargarDatos() {
         palabra = " ";
     }
     cambiarPagina(1, estado, especie, raza, barrio, palabra);
+}
+
+function cambiarCantidadPaginacion() {
+    cantPagTotal = $("#cantPag").val();
+    cambiarPagina(1, estado, especie, raza, barrio, palabra, cantPagTotal);
+
 }

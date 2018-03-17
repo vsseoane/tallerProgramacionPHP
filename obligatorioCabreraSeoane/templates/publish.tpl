@@ -20,7 +20,6 @@
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/functions.js" type="text/javascript"></script>
         <script src="js/functionsPublish.js" type="text/javascript"></script>
-        <script src="js/fancyupload.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -103,7 +102,8 @@
 
                                 <button type="button" id="otraFoto"> Seleccionar otra foto </button>
 
-                                <input type="hidden" name="publicacionId" value="{$publicacionId}" />
+                              <!--  <input type="hidden" name="publicacionId" value="{$publicacionId}" />-->
+                                <input type="hidden" name="publicacionId" value="" />
                                 <input type="hidden" name="accion" value="subir" />
 
 

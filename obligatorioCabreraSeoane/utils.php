@@ -3,26 +3,20 @@
 require_once("includes/libs/Smarty.class.php");
 require_once("class.Conexion.BD.php");
 
-require_once("configuracion.php");
-
 function getConexion() {
     $cn = new ConexionBD(
-            "mysql", HOST, BASE, USUARIO, CLAVE);
+            "mysql", "localhost", "mascotas", "root", "root");
 
     $cn->conectar();
     return $cn;
 }
 
-/* function getConexion(){
-  return $conn;
-  } */
-
 function getSmarty() {
     $miSmarty = new Smarty();
-    $miSmarty->template_dir = TEMPLATE_DIR;
-    $miSmarty->compile_dir = COMPILER_DIR;
-    $miSmarty->cache_dir = CACHE_DIR;
-    $miSmarty->config_dir = CONFIG_DIR;
+    $miSmarty->template_dir = "templates";
+    $miSmarty->compile_dir = "templates_c";
+    $miSmarty->cache_dir = "cache";
+    $miSmarty->config_dir = "config";
     $miSmarty->assign("usuario", usuarioLogueado());
     return $miSmarty;
 }
@@ -118,7 +112,6 @@ function obtenerPublicacionesParaIndex() {
     $cn = getConexion();
     $cn->consulta("select * from publicaciones where abierto=1 limit 0, 10");
 
-
     $resultados = $cn->restantesRegistros();
     $tipo = 3;
     foreach ($resultados as $key => $valor) {
@@ -131,6 +124,7 @@ function obtenerPublicacionesParaIndex() {
     }
     return $resultados;
 }
+
 
 function publicar($usuario, $titulo, $descripcion, $especie, $raza, $barrio, $tipo, $latitud, $longitud) {
     $message = "";
