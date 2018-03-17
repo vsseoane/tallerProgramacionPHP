@@ -19,6 +19,7 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/functions.js" type="text/javascript"></script>
+        <script src="js/functionsPublish.js" type="text/javascript"></script>
 
     </head>
 
@@ -39,14 +40,14 @@
 
                         <div class="col-2">
 
-                        <div class="col">
-                            <select class="custom-select" name="estado" id="estado">
-                                <option value='' selected>Estado</option>
-                                <option value="1"> Encontrado</option>
-                               <option value="2"> Perdido</option>
+                            <div class="col">
+                                <select class="custom-select" name="estado" id="estado">
+                                    <option value='' selected>Estado</option>
+                                    <option value='E'> Encontrado</option>
+                                    <option value='P'> Perdido</option>
 
-                            </select>
-                        </div>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="col">
@@ -59,16 +60,12 @@
                             </select>
                         </div>
                         <div class="col">
-                            <select class="custom-select" name="razas">
-                                <option value='' selected>Raza</option>
-                                {foreach from=$razas item=raza}
-                                    <option value="{$raza.id}">{$raza.nombre}</option>
-                                {/foreach}
-
+                            <select class="custom-select" name="razas" id="razas">
+                                <option value=''>Raza</option>
                             </select>
                         </div>
                         <div class="col">
-                            <select class="custom-select" name="barrio">
+                            <select class="custom-select" name="barrio"  id="barrio">
                                 <option value='' selected>Barrio</option>
                                 {foreach from=$barrios item=barrio}
                                     <option value="{$barrio.id}">{$barrio.nombre}</option>
@@ -83,8 +80,8 @@
                         <div class="col-5">
                             <div class="input-group">
                                 <span class="fa fa-search input-group-addon" id="basic-addon1"> </span>
-                                <input type="text" class="form-control" placeholder="Ingrese texto a buscar..." aria-describedby="basic-addon1">
-                                <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                                <input type="text" class="form-control" placeholder="Ingrese texto a buscar..." aria-describedby="basic-addon1" id="palabra">
+                                <button class="btn btn-success my-2 my-sm-0" id="botonBuscar">Buscar</button>
                             </div>
                             <div class="col-2 d-flex flex-row-reverse">
 
@@ -101,41 +98,14 @@
 
 
 
-            <div class="pagination d-flex justify-content-center sticky-top">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            {include file="pagination.tpl"}
 
-            <div id="publicaciones">
-                
-                    <div class="row justify-content-center">
-                        {foreach from=$publicaciones item=pub}
+            <div id="publicaciones">                
+                <div class="row">
+                    {foreach from=$publicaciones item=pub}
                         <div class="col">
                             <div class="card" style="width: 20rem;">
-                                <div class="not-found card-header">{$pub.tipo}</div>
+                                <div {if $pub.tipo=="Perdido"} class="not-found card-header" {/if} {if $pub.tipo=="Encontrado"} class="found card-header" {/if}>{$pub.tipo}</div>
                                 <img class="card-img-top" src="https://html.com/wp-content/uploads/very-large-flamingo.jpg" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">{$pub.titulo}</h5>
@@ -146,10 +116,12 @@
                             </div>
 
                         </div>
-                        {/foreach}
+                    {/foreach}
                 </div>
             </div>
 
-    </body>
+        </ul>
+           <h1>pdf proando <a target="_blank" href="generarPDF.php">  descargar </a></h1>
+</body>
 
 </html>

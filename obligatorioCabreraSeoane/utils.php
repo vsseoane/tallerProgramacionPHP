@@ -89,6 +89,7 @@ function userAndPasswordCorrect($email, $pass) {
 
 function usuarioLogueado() {
     if (isset($_SESSION['usuario'])) {
+        $_SESSION['usuario'];
         return $_SESSION['usuario'];
     }
 
@@ -115,11 +116,11 @@ function obtenerRazaBy($especie_id) {
 
 function obtenerPublicacionesParaIndex() {
     $cn = getConexion();
-    $cn->consulta("select * from publicaciones where abierto=:abierto", array(array('abierto', 1, 'bool')));
+    $cn->consulta("select * from publicaciones where abierto=1 limit 0, 10");
+
 
     $resultados = $cn->restantesRegistros();
     $tipo = 3;
-    $abierto = 7;
     foreach ($resultados as $key => $valor) {
         if (($valor[$tipo]) === "E") {
             $resultados[$key]["tipo"] = "Encontrado";
@@ -156,10 +157,6 @@ function publicar($usuario, $titulo, $descripcion, $especie, $raza, $barrio, $ti
 function obtenerPublicacionPorId($pubId) {
 
     $cn = getConexion();
-    /* $cn->consulta(
-      "select * from publicaciones where id=:pub", array(
-      array("pub", $pubId, 'int')
-      )); */
 
     $cn->consulta(
             "select p.id, p.titulo, p.descripcion, p.tipo, p.abierto, p.usuario_id, p.exitoso, p.latitud, p.longitud, r.nombre as nombRaza, e.nombre as nombEspecie, b.nombre as nombBarrio from publicaciones p, especies e, razas r, barrios b where p.id=:pub and p.especie_id = e.id and p.raza_id = r.id and p.barrio_id = b.id", array(
@@ -208,24 +205,12 @@ function cerrar($pubId, $exitoso){
         array("exitoso", $exitoso, 'bool')
     ));
 }
-/*function publicar($usuario, $titulo, $descripcion, $especie, $raza, $estado, $barrio, $latitud, $longitud) {
-    $message = "";
 
-
+function getCantTotalPublicacionesAbiertas(){
     $cn = getConexion();
-    $cn->consulta(
-            "insert into publicaciones(titulo, descripcion, tipo, especie_id, raza_id, barrio_id, abierto, usuario_id, exitoso, latitud, longitud) "
-            . "values(:titulo,:descripcion,:estado,:especie,:raza,:barrio,1,:usuario,NULL,:latitud,:longitud)", array(
-        array("titulo", $titulo, 'string'),
-        array("descripcion", $descripcion, 'string'),
-        array("estado", $estado, 'string'),
-        array("especie", $especie, 'int'),
-        array("raza", $raza, 'int'),
-        array("barrio", $barrio, 'int'),
-        array("usuario", $usuario, 'int'),
-        array("latitud", $latitud, 'int'),
-        array("longitud", $longitud, 'int')
-    ));
+    $cn->consulta("select count(*) from publicaciones where abierto=1");
 
-    return $message;
-}*/
+    $resultado = $cn->restantesRegistros();
+    return $resultado;
+    
+}

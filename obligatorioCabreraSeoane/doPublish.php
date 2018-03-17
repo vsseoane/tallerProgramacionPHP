@@ -55,3 +55,4 @@ $smarty->assign("razas", obtenerRazaBy(1));
 $smarty->display("publish.tpl");
 ?>
 
+
