@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once("includes/libs/Smarty.class.php");
 require_once 'utils.php';

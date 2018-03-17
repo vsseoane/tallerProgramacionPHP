@@ -1,11 +1,11 @@
 <?php
 session_start();
-//incluir la libreria:
+
 require_once 'utils.php';
 require_once("includes/libs/Smarty.class.php"); 
 
 $mensaje = $_SESSION['mensaje'] = "";
-//instancio un objeto
+
 $smarty = getSmarty();
 
 $smarty->assign("mensaje",$mensaje);

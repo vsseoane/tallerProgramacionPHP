@@ -3,20 +3,26 @@
 require_once("includes/libs/Smarty.class.php");
 require_once("class.Conexion.BD.php");
 
+require_once("configuracion.php");
+
 function getConexion() {
     $cn = new ConexionBD(
-            "mysql", "localhost", "mascotas", "root", "root");
+            "mysql", HOST, BASE, USUARIO, CLAVE);
 
     $cn->conectar();
     return $cn;
 }
 
+/* function getConexion(){
+  return $conn;
+  } */
+
 function getSmarty() {
     $miSmarty = new Smarty();
-    $miSmarty->template_dir = "templates";
-    $miSmarty->compile_dir = "templates_c";
-    $miSmarty->cache_dir = "cache";
-    $miSmarty->config_dir = "config";
+    $miSmarty->template_dir = TEMPLATE_DIR;
+    $miSmarty->compile_dir = COMPILER_DIR;
+    $miSmarty->cache_dir = CACHE_DIR;
+    $miSmarty->config_dir = CONFIG_DIR;
     $miSmarty->assign("usuario", usuarioLogueado());
     return $miSmarty;
 }
@@ -107,22 +113,119 @@ function obtenerRazaBy($especie_id) {
     return $cn->restantesRegistros();
 }
 
-
 function obtenerPublicacionesParaIndex() {
     $cn = getConexion();
     $cn->consulta("select * from publicaciones where abierto=:abierto", array(array('abierto', 1, 'bool')));
-    
+
     $resultados = $cn->restantesRegistros();
     $tipo = 3;
     $abierto = 7;
     foreach ($resultados as $key => $valor) {
-       if(($valor[$tipo]) === "E"){
-           $resultados[$key]["tipo"] = "Encontrado";
-       }else if(($valor[$tipo]) === "P"){
+        if (($valor[$tipo]) === "E") {
+            $resultados[$key]["tipo"] = "Encontrado";
+        } else if (($valor[$tipo]) === "P") {
             $resultados[$key]["tipo"] = "Perdido";
         }
-        $resultados[$key]["descripcion"] =   substr($resultados[$key]["descripcion"], 0, 150) . "..."; 
-
+        $resultados[$key]["descripcion"] = substr($resultados[$key]["descripcion"], 0, 150) . "...";
     }
     return $resultados;
 }
+
+function publicar($usuario, $titulo, $descripcion, $especie, $raza, $barrio, $tipo, $latitud, $longitud) {
+    $message = "";
+    $cn = getConexion();
+
+    $cn->consulta(
+            "insert into publicaciones(titulo, descripcion, tipo, especie_id, raza_id, barrio_id, abierto, usuario_id, exitoso, latitud, longitud) values(:titulo,:descripcion,:tipo,:especie,:raza,:barrio,1,:usuario,NULL,:latitud,:longitud)", array(
+        array("usuario", $usuario, 'int'),
+        array("titulo", $titulo, 'string'),
+        array("descripcion", $descripcion, 'string'),
+        array("tipo", $tipo, 'string'),
+        array("especie", $especie, 'int'),
+        array("raza", $raza, 'int'),
+        array("barrio", $barrio, 'int'),
+        array("latitud", $latitud, 'int'),
+        array("longitud", $longitud, 'int'),
+    ));
+
+    $message = $cn->ultimoIdInsert();
+
+    return $message;
+}
+
+function obtenerPublicacionPorId($pubId) {
+
+    $cn = getConexion();
+    /* $cn->consulta(
+      "select * from publicaciones where id=:pub", array(
+      array("pub", $pubId, 'int')
+      )); */
+
+    $cn->consulta(
+            "select p.id, p.titulo, p.descripcion, p.tipo, p.abierto, p.usuario_id, p.exitoso, p.latitud, p.longitud, r.nombre as nombRaza, e.nombre as nombEspecie, b.nombre as nombBarrio from publicaciones p, especies e, razas r, barrios b where p.id=:pub and p.especie_id = e.id and p.raza_id = r.id and p.barrio_id = b.id", array(
+        array("pub", $pubId, 'int')
+    ));
+
+    return $cn->siguienteRegistro();
+}
+
+function obtenerPreguntasPorId($pubId) {
+    $cn = getConexion();
+
+    $cn->consulta(
+            "select p.id, p.id_publicacion, p.texto, p.respuesta, p.usuario_id, u.email from preguntas p, usuarios u where p.id_publicacion=:pub and p.usuario_id = u.id", array(
+        array("pub", $pubId, 'int')
+    ));
+
+    return $cn->restantesRegistros();
+}
+
+function preguntar($pubId, $texto, $usuarioId) {
+
+    $cn = getConexion();
+    $cn->consulta(
+            "insert into preguntas(id_publicacion, texto, usuario_id) values(:id_publicacion,:texto,:usuario_id)", array(
+        array("id_publicacion", $pubId, 'int'),
+        array("texto", $texto, 'string'),
+        array("usuario_id", $usuarioId, 'int')
+    ));
+}
+
+function responder($preguntaId, $respuesta){
+    $cn = getConexion();
+    $cn->consulta(
+            "update preguntas set respuesta = :respuesta where id = :id", array(
+        array("id", $preguntaId, 'int'),
+        array("respuesta", $respuesta, 'string')
+    ));
+}
+
+function cerrar($pubId, $exitoso){
+    $cn = getConexion();
+    $cn->consulta(
+            "update publicaciones set abierto = 0, exitoso = :exitoso where id = :id", array(
+        array("id", $pubId, 'int'),
+        array("exitoso", $exitoso, 'bool')
+    ));
+}
+/*function publicar($usuario, $titulo, $descripcion, $especie, $raza, $estado, $barrio, $latitud, $longitud) {
+    $message = "";
+
+
+    $cn = getConexion();
+    $cn->consulta(
+            "insert into publicaciones(titulo, descripcion, tipo, especie_id, raza_id, barrio_id, abierto, usuario_id, exitoso, latitud, longitud) "
+            . "values(:titulo,:descripcion,:estado,:especie,:raza,:barrio,1,:usuario,NULL,:latitud,:longitud)", array(
+        array("titulo", $titulo, 'string'),
+        array("descripcion", $descripcion, 'string'),
+        array("estado", $estado, 'string'),
+        array("especie", $especie, 'int'),
+        array("raza", $raza, 'int'),
+        array("barrio", $barrio, 'int'),
+        array("usuario", $usuario, 'int'),
+        array("latitud", $latitud, 'int'),
+        array("longitud", $longitud, 'int')
+    ));
+
+    return $message;
+}*/

@@ -28,13 +28,13 @@
         </div>
 
         <div class="form-label-group">
-            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-            <label for="inputEmail">Email address</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
+            <label for="inputEmail">Email</label>
         </div>
 
         <div class="form-label-group">
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
+            <label for="inputPassword">Contraseña</label>
         </div>
 
         <button class="btn btn-lg btn-success btn-block" type="submit">Ingresar</button>
@@ -42,6 +42,7 @@
         <br>
             <div class="message">{$mensaje}</div>
         <br>
+        
         <label>¿Eres nuevo?&nbsp;</label><a href="register.php">Registrarse››</a>
         <br>
         <a href="index.php">‹‹Volver</a>

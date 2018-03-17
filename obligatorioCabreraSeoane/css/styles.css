@@ -5,60 +5,112 @@ body{
         background-blend-mode: screen !important;
         background-position: bottom !important; 
         background-attachment: fixed; */
-    }
-    
-    .pagination{
-        margin-top: 5px;
-        opacity: 0.85;
-    }
-        .pagination .page-link{
-            background: black;
-            color:whitesmoke;
-        }
-    
-    .searcher{
-        margin-top: 20px;
-        margin-left: 5%;
-        margin-right: 5%;
-        box-shadow: 10px 10px 8px #888888;
-        opacity: 0.85;
-        
-    }
-        .searcher .btn{
-            margin-left: 30px;
-        }
-    
-    .col .card{
-        margin-top: 20px;
-        box-shadow: 10px 10px 8px #888888;
-    }
-    
-    .found{
-        background-color: rgba(0, 128, 0, 0.555) !important;
-    }
-    
-    .not-found{
-        background-color: rgba(255, 0, 0, 0.555) !important;
-    }
-    
-    .background-img{
-        z-index: -2;
-        /* background-image: url("https://html.com/wp-content/uploads/very-large-flamingo.jpg") !important; */
-        background-color: rgb(255, 255, 255) !important;
-    }
-    
-    
-    /* Custom File Input */
-    .custom-file-control:before{
-        content: "Subir" !important;
-    }
-    
-    .custom-file-control:after{
-        content: "Elejir archivo..." !important;
-    }
+}
 
-    /*Maps*/
-    #map-publish {
-        height: 350px;
-        width: 90%;
-    }
+.pagination{
+    margin-top: 5px;
+    opacity: 0.85;
+}
+.pagination .page-link{
+    background: black;
+    color:whitesmoke;
+}
+
+.login{
+    color: lightgray;
+}
+
+.searcher{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: 10px 10px 8px #888888;
+    opacity: 0.85;
+
+}
+.searcher .btn{
+    margin-left: 30px;
+}
+
+.col .card{
+    margin-top: 20px;
+    box-shadow: 10px 10px 8px #888888;
+}
+
+.found{
+    background-color: rgba(0, 128, 0, 0.555) !important;
+}
+
+.not-found{
+    background-color: rgba(255, 0, 0, 0.555) !important;
+}
+
+/*Maps*/
+#map-publish {
+    height: 350px;
+    width: 90%;
+}
+
+/*Fancy Upload*/
+
+a.hover {
+    color: red;
+}
+
+#demo-list {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+#demo-list .file-invalid {
+    cursor: pointer;
+    color: #514721;
+    padding-left: 48px;
+    line-height: 24px;
+    background: url(assets/error.png) no-repeat 24px 5px;
+    margin-bottom: 1px;
+}
+#demo-list .file-invalid span {
+    background-color: #fff6bf;
+    padding: 1px;
+}
+
+#demo-list .file {
+    line-height: 2em;
+    padding-left: 22px;
+    background: url(assets/attach.png) no-repeat 1px 50%;
+}
+
+#demo-list .file span,
+#demo-list .file a {
+    padding: 0 4px;
+}
+
+#demo-list .file .file-size {
+    color: #666;
+}
+
+#demo-list .file .file-error {
+    color: #8a1f11;
+}
+
+#demo-list .file .file-progress {
+    width: 125px;
+    height: 12px;
+    vertical-align: middle;
+    background-image: url(../../assets/progress-bar/progress.gif);
+}
+
+.carousel-inner{
+    width: 100%;
+    height: 480px;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 70%;
+    height: 480px;
+    margin: auto;
+}

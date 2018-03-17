@@ -56,6 +56,8 @@ function initMap() {
 
     map.addListener('click', function (e) {
         placeMarker(e.latLng, map);
+        $("#latitud").val(e.latLng.lat);
+        $("#longitud").val(e.latLng.lng);
         alert(e.latLng);
     });
 
