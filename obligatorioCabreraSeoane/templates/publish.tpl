@@ -24,7 +24,6 @@
 
     <body>
 
-
         {include file="nav.tpl"}
 
 
@@ -41,19 +40,19 @@
 
                             <!-- Titulo -->
                             <h3>Título:</h3>
-                            <textarea class="form-control" id="titulo" rows="2" name="titulo" ></textarea>
+                            <textarea class="form-control" id="titulo" rows="1" name="titulo" required></textarea>
                             <hr>
 
                             <!-- Descripcion -->
                             <h3>Descripción:</h3>
-                            <textarea class="form-control" id="descripcion" rows="3" name="descripcion"></textarea>
+                            <textarea class="form-control" id="descripcion" rows="3" name="descripcion" required></textarea>
                             <hr>
 
                             <h3>Datos: </h3>
                             <div class="row justify-content-center">
                                 <div class="col-3">
-                                    <select class="custom-select" name="especie" id="especie">
-                                        <option value='' selected>Seleccione una Especie</option>
+                                    <select class="custom-select" name="especie" id="especie" required>
+                                        <option value='' selected>Especie</option>
                                         {foreach from=$especies item=especie}
                                             <option value="{$especie.id}">{$especie.nombre}</option>
                                         {/foreach}
@@ -62,12 +61,12 @@
                                 </div>
                                 <div class="col-3">
 
-                                    <select class="custom-select" name="razas" id="razas">
-                                        <option value=' '>Seleccione una Raza</option>
+                                    <select class="custom-select" name="razas" id="razas" required>
+                                        <option value=' '>Raza</option>
                                     </select>
                                 </div>
                                 <div class="col-3">
-                                    <select class="custom-select" name="barrio">
+                                    <select class="custom-select" name="barrio" required>
                                         <option value='' selected>Barrio</option>
                                         {foreach from=$barrios item=barrio}
                                             <option value  ="{$barrio.id}">{$barrio.nombre}</option>
@@ -92,13 +91,13 @@
                             </div>
                             <hr>
 
-                            <!-- Pictures -->
+                            <!-- Fotos -->
                             <h3>Fotos:</h3>
 
                             <br>
                             <div class="container">
 
-                                <input type="file" name="archivo_1" class="ultimoFile" accept=".jpg,.jpeg"/>
+                                <input type="file" name="archivo_1" class="ultimoFile" accept=".jpg,.jpeg,.png" required/>
 
                                 <button type="button" id="otraFoto"> Seleccionar otra foto </button>
 
@@ -116,8 +115,8 @@
                             <label>(Opcional)</label>                      
 
                             <div id="map-publish"> </div>
-                            <input type="hidden" id = "latitud" name="latitud" value="-34.901112" />
-                            <input type="hidden" id= "longitud" name="longitud" value="-56.164532" />
+                            <input type="hidden" id = "latitud" name="latitud" />
+                            <input type="hidden" id= "longitud" name="longitud" />
 
                             <hr>
 
@@ -127,10 +126,7 @@
                     </form>
                 </div>
 
-
-
             </div>
-
 
         </div>
 

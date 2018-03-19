@@ -21,7 +21,7 @@ function placeMarker(position, map) {
     map.panTo(position);
 }
 
-function getLocation() {
+/*function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(onSuccess);
     } else {
@@ -33,11 +33,11 @@ function onSuccess(position) {
     if (position != null) {
         uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
     }
-}
+}*/
 
 function initMap() {
 
-    getLocation();
+    //getLocation();
 
     if (uluru == null) {
         // Center Montevideo position if actual position can not be obtained

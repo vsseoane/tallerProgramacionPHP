@@ -3,7 +3,31 @@
 require_once("includes/libs/Smarty.class.php");
 require_once("class.Conexion.BD.php");
 
+require_once("configuracion.php");
+
 function getConexion() {
+    $cn = new ConexionBD(
+            "mysql", HOST, BASE, USUARIO, CLAVE);
+
+    $cn->conectar();
+    return $cn;
+}
+
+/* function getConexion(){
+  return $conn;
+  } */
+
+function getSmarty() {
+    $miSmarty = new Smarty();
+    $miSmarty->template_dir = TEMPLATE_DIR;
+    $miSmarty->compile_dir = COMPILER_DIR;
+    $miSmarty->cache_dir = CACHE_DIR;
+    $miSmarty->config_dir = CONFIG_DIR;
+    $miSmarty->assign("usuario", usuarioLogueado());
+    return $miSmarty;
+}
+
+/*function getConexion() {
     $cn = new ConexionBD(
             "mysql", "localhost", "mascotas", "root", "root");
 
@@ -19,7 +43,7 @@ function getSmarty() {
     $miSmarty->config_dir = "config";
     $miSmarty->assign("usuario", usuarioLogueado());
     return $miSmarty;
-}
+}*/
 
 function showUser() {
     $cn = getConexion();
@@ -125,7 +149,6 @@ function obtenerPublicacionesParaIndex() {
     return $resultados;
 }
 
-
 function publicar($usuario, $titulo, $descripcion, $especie, $raza, $barrio, $tipo, $latitud, $longitud) {
     $message = "";
     $cn = getConexion();
@@ -182,7 +205,7 @@ function preguntar($pubId, $texto, $usuarioId) {
     ));
 }
 
-function responder($preguntaId, $respuesta){
+function responder($preguntaId, $respuesta) {
     $cn = getConexion();
     $cn->consulta(
             "update preguntas set respuesta = :respuesta where id = :id", array(
@@ -191,7 +214,7 @@ function responder($preguntaId, $respuesta){
     ));
 }
 
-function cerrar($pubId, $exitoso){
+function cerrar($pubId, $exitoso) {
     $cn = getConexion();
     $cn->consulta(
             "update publicaciones set abierto = 0, exitoso = :exitoso where id = :id", array(
@@ -200,11 +223,39 @@ function cerrar($pubId, $exitoso){
     ));
 }
 
-function getCantTotalPublicacionesAbiertas(){
+function getCantTotalPublicacionesAbiertas() {
     $cn = getConexion();
     $cn->consulta("select count(*) from publicaciones where abierto=1");
 
     $resultado = $cn->restantesRegistros();
     return $resultado;
+}
+
+function getTotalesPorEspecies() {
+
+    $cn = getConexion();
+    $cn->consulta("select e.nombre,count(*) as cant from publicaciones p, especies e where p.especie_id = e.id group by p.especie_id");
     
+    $resultado = $cn->restantesRegistros();
+    return $resultado;
+}
+
+function getTotalesPorEstado($estado) {
+    $cn = getConexion();
+    $cn->consulta("select e.nombre,count(*) as cant from publicaciones p, especies e where p.especie_id = e.id and p.abierto = :estado group by p.especie_id", array(
+        array("estado", $estado, 'int')
+        ));
+    
+    $resultado = $cn->restantesRegistros();
+    return $resultado;
+}
+
+function getTotalesSegunEncontrado($encontrado) {
+    $cn = getConexion();
+    $cn->consulta("select e.nombre,count(*) as cant from publicaciones p, especies e where p.especie_id = e.id and p.exitoso = :encontrado group by p.especie_id", array(
+        array("encontrado", $encontrado, 'int')
+        ));
+    
+    $resultado = $cn->restantesRegistros();
+    return $resultado;
 }

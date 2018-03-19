@@ -4,7 +4,6 @@ session_start();
 require_once 'utils.php';
 require_once("includes/libs/Smarty.class.php");
 
-$pubId = 1;
 
 if (isset($_GET['id'])) {
     $pubId = $_GET['id'];
@@ -39,6 +38,7 @@ if (isset($_GET['id'])) {
     $miSmarty->assign("preguntas", $preguntas);
     $miSmarty->assign("fotos", $fotos);
     $miSmarty->assign("indices", $indices);
-    $miSmarty->display('detallePublicacion.tpl');
+    $miSmarty->display("detallePublicacion.tpl");
+    
 }
 ?>

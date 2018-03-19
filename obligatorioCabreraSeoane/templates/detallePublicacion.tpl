@@ -17,8 +17,6 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/functions.js" type="text/javascript"></script>
-        <script src="js/functionsPublish.js" type="text/javascript"></script>
 
         <script type="text/javascript">
 
@@ -28,8 +26,6 @@
                 $("#btnCerrar").click(function () {
                     vExitoso = $('input[name=optExitoso]:checked', '#cerrarPublicacion').val();
                     vPubId = $("#pubIdCerrar").val();
-
-                    alert(vExitoso + " " + vPubId);
 
                     $.ajax({
                         url: "cerrarPublicacion.php",
@@ -45,30 +41,34 @@
 
                 });
 
-            });
+                var uluru;
+                var zoom = 12;
 
-            function cerrarPublicacion(idPub, exitoso) {
-                $.ajax({
-                    url: "cerrarPublicacion.php",
-                    dataType: "json",
-                    type: "POST",
-                    data: "idPub=" + idPub + "&exitoso=" + exitoso,
-                    timeout: 2000,
-                    beforeSend: function () {
+                var vLat = $("#inputLatitud").val();
+                var vLng = $("#inputLongitud").val();
 
-                    }
-                }).done(function (data) {
-                    $.get("index.php");
+                uluru = {lat: vLat, lng: vLng}
+                
+                alert(uluru);
+                
+                var map = new google.maps.Map(document.getElementById('map-detail'), {
+                    zoom: zoom,
+                    center: uluru
                 });
 
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
 
-            }
+            });
 
         </script>
 
     </head>
 
     <body>
+        <label>PRUEBAAAA</label>
 
         {if $publicacion.usuario_id == $usuarioLogueado.id}
             <!-- Modal -->
@@ -82,29 +82,26 @@
                             </button>
                         </div>
 
-                        <form method ="post" action="cerrarPublicacion.php" id="cerrarPublicacion">
+                        <!-- Body -->
+                        <div class="modal-body">
+                            <label>Indique si la mascota se reencontro con su dueño: </label>
 
-                            <!-- Body -->
-                            <div class="modal-body">
-                                <label>Indique si la mascota se reencontro con su dueño: </label>
-
-                                <div class="radio">
-                                    <label><input type="radio" name="optExitoso" value="1"> <i class="fa fa-smile-o" aria-hidden="true"> Si </i> </label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="optExitoso" value=""> <i class="fa fa-frown-o" aria-hidden="true"> No </i> </label>
-                                </div>
-
-                                <input id = "pubIdCerrar" type="hidden" name="pubIdCerrar" value="{$publicacion.id}" />
-
+                            <div class="radio">
+                                <label><input type="radio" name="optExitoso" value="1"> <i class="fa fa-smile-o" aria-hidden="true"> Si </i> </label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optExitoso" value=""> <i class="fa fa-frown-o" aria-hidden="true"> No </i> </label>
                             </div>
 
-                            <!-- Footer -->
-                            <div class="modal-footer">
-                                <button id="btnCerrar" type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
-                            </div>
+                            <input id = "pubIdCerrar" type="hidden" name="pubIdCerrar" value="{$publicacion.id}" />
 
-                        </form>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="modal-footer">
+                            <button id="btnCerrar" type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                        </div>
+
 
                     </div>
                 </div>
@@ -120,7 +117,7 @@
 
                     <h4>Detalle de Publicación</h4>
                     <label>Información detallada de la publicación seleccionada. </label>
-                     <a target="_blank" href="generarPDF.php?id={$publicacion.id}">  Descargar PDF </a>
+                    <a target="_blank" href="generarPDF.php?id={$publicacion.id}">  Descargar PDF </a>
                 </div>
 
                 <div class="card-body">
@@ -205,13 +202,21 @@
                         </label>
                         <hr>
 
-                        <h3>Ubicacion exacta:</h3>
-                        <label>(Opcional)</label>                      
+                        <input type="hidden" id="inputLatitud" name="inputLatitud" value="{$publicacion.latitud}" />
+                        <input type="hidden" id="inputLongitud" name="inputLongitud" value="{$publicacion.longitud}" />
 
-                        <div id="map-publish"> </div>
+                        {if $publicacion.latitud != '' && $publicacion.longitud !=''}
 
-                        <br>
-                        <hr>
+                            <h3>Ubicacion exacta:</h3>
+                            <label>(Opcional)</label>                      
+
+                            <div id="map-detail"> 
+
+                            </div>
+
+                            <br>
+                            <hr>
+                        {/if}
 
                         <h3>Preguntas y respuestas:</h3>
                         <hr>

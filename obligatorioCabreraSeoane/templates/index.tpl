@@ -25,7 +25,6 @@
 
     <body>
 
-
         {include file="nav.tpl"}
 
         <div class="container-fluid">
@@ -92,9 +91,9 @@
 
 
                     </div>
-                                
+
                 </div>
-                                <div class="cantPag" name="cantPagTotal" id="cantPagTotal">
+                <div class="cantPag" name="cantPagTotal" id="cantPagTotal">
                     <select class="custom-select" name="cantPag" id="cantPag">
                         <option value='10' selected>10</option>
                         <option value='20'> 20</option>
@@ -103,12 +102,9 @@
 
                     </select>
                 </div>
-                                
-                                
+
+
             </div>
-
-
-
 
             {include file="pagination.tpl"}
 
@@ -118,12 +114,12 @@
                         <div class="col">
                             <div class="card" style="width: 20rem;">
                                 <div {if $pub.tipo=="Perdido"} class="not-found card-header" {/if} {if $pub.tipo=="Encontrado"} class="found card-header" {/if}>{$pub.tipo}</div>
-                                <img class="card-img-top" src="fotos/{$pub.id}/1.jpg" alt="Card image cap">
+                                <!--<img class="card-img-top" src="fotos/{$pub.id}/1.jpg" alt="Card image cap"> -->
                                 <div class="card-body">
-                                    <a class="card-title" href="./detallePublicacion.php?id={$pub.id}" target="_blank" >{$pub.titulo}</a>
+                                    <a class="card-title" href="detallePublicacion.php?id={$pub.id}" target="_blank" >{$pub.titulo}</a>
                                     <p class="card-text">{$pub.descripcion}
                                     </p>
-                                    <a href="./detallePublicacion.php?id={$pub.id}" class="btn btn-primary" target="_blank" >Ver Detalles</a>
+                                    <a href="detallePublicacion.php?id={$pub.id}" class="btn btn-primary" target="_blank" >Ver Detalles</a>
                                 </div>
                             </div>
 
@@ -131,8 +127,8 @@
                     {/foreach}
                 </div>
             </div>
+        </div>
 
-        </ul>
-</body>
+    </body>
 
 </html>
