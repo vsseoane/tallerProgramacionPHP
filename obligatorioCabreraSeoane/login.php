@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
 require_once 'utils.php';
 //incluir la libreria:
 require_once("includes/libs/Smarty.class.php"); 

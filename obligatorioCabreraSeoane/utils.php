@@ -62,7 +62,7 @@ function isValidPassword($pass) {
 function isRepeatedEmail($email) {
     $result = false;
     $cn = getConexion();
-    $cn->consulta("select * from usuarios where email =:emailBD", array(array('emailBD', $email, 'string'))); // se escribe asi para evitar sql injector
+    $cn->consulta("select * from usuarios where email =:emailBD", array(array('emailBD', $email, 'string')));     
 
     $user = $cn->siguienteRegistro();
     if ($user) {
@@ -74,11 +74,12 @@ function isRepeatedEmail($email) {
 function userAndPasswordCorrect($email, $pass) {
     $result = false;
     $cn = getConexion();
-    $cn->consulta("select * from usuarios where email =:emailBD and password=:passBD", array(array('emailBD', $email, 'string'), array('passBD', $pass, 'string'))); // se escribe asi para evitar sql injector
+    $cn->consulta("select * from usuarios where email =:emailBD and password=:passBD", array(array('emailBD', $email, 'string'), array('passBD', $pass, 'string')));
 
     $user = $cn->siguienteRegistro();
-    $_SESSION["usuario"] = $user;
-    if ($user) {
+    
+    if ($user['email'] == $email ) {
+        $_SESSION["usuario"] = $user;
         $result = true;
     }
     return $result;

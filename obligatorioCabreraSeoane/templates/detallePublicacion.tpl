@@ -37,11 +37,11 @@
 
                         }
                     }).done(function (data) {
-                        $.get("index.php");
+                        
                     });
-
+                    $.get("/index.php");
                 });
-                
+
             });
 
 
@@ -65,7 +65,7 @@
 
                         <!-- Body -->
                         <div class="modal-body">
-                            <label>Indique si la mascota se reencontro con su dueño: </label>
+                            <label>Indique si la mascota se reencontró con su dueño: </label>
 
                             <div class="radio">
                                 <label><input type="radio" name="optExitoso" value="1"> <i class="fa fa-smile-o" aria-hidden="true"> Si </i> </label>
@@ -185,7 +185,7 @@
 
                         <input type="hidden" id="inputLatitud" name="inputLatitud" value="{$publicacion.latitud}" />
                         <input type="hidden" id="inputLongitud" name="inputLongitud" value="{$publicacion.longitud}" />
-                        
+
                         {if $publicacion.latitud != '' && $publicacion.longitud !='' && ($publicacion.latitud != '0.00000000' && $publicacion.longitud !='0.00000000')}
 
                             <h3>Ubicacion exacta:</h3>
@@ -272,7 +272,7 @@
         </div>            
 
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeDvKJ-T0fDDUugbdEjJMQ94LOITJcf_U&callback=initMap">
-            
+
         </script>
 
     </body>

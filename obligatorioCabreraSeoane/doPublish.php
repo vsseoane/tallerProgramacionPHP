@@ -35,7 +35,8 @@ while (list($clave, $file) = each($_FILES)) {
     if (in_array($tipoImagen, $extensionesPermitidas)) {
 
         $tmp = $file["tmp_name"];
-
+        move_uploaded_file($tmp, $dir . $nombre);
+        
     }
     
     $cont++;
