@@ -21,26 +21,10 @@ function placeMarker(position, map) {
     map.panTo(position);
 }
 
-/*function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(onSuccess);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function onSuccess(position) {
-    debugger;
-    if (position != null) {
-        uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
-    }
-}*/
-
 function initMap() {
 
-    //getLocation();
-
     if (uluru == null) {
-        // Center Montevideo position if actual position can not be obtained
+        // Centro en Montevideo
         zoom = 12;
         uluru = {lat: -34.901112, lng: -56.164532};
     }
@@ -49,16 +33,11 @@ function initMap() {
         zoom: zoom,
         center: uluru
     });
-    /*var marker = new google.maps.Marker({
-     position: uluru,
-     map: map
-     });*/
 
     map.addListener('click', function (e) {
         placeMarker(e.latLng, map);
         $("#latitud").val(e.latLng.lat);
         $("#longitud").val(e.latLng.lng);
-        alert(e.latLng);
     });
 
 }

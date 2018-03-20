@@ -12,7 +12,7 @@
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
-            {if (isset($usuario))}
+            {if (isset($usuario) && $usuariio!='')}
                 <li class="nav-item">
                     <a class="nav-link" href="publish.php">Publicar</a>
                 </li>
@@ -23,7 +23,7 @@
         </ul>
 
         <ul class="navbar-nav navbar-right">
-            {if (!isset($usuario))}
+            {if (!isset($usuario) || $usuario=='')}
                 <li class="nav-item ">
                     <a class="nav-link" href="login.php">Iniciar Sesión</a>
                 </li>

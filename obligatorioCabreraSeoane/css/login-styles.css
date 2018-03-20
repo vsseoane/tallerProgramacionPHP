@@ -9,7 +9,7 @@
   }
   
   .container {
-    background-image: url('http://www.petsworld.in/blog/wp-content/uploads/2015/03/pets.jpg');
+    background-image: c;
     background-color: rgba(36, 158, 20, 0.527);
     background-blend-mode: screen;
   }
@@ -27,7 +27,7 @@
     padding-top: 40px;
     padding-bottom: 40px;
 
-    background-image: url('http://www.petsworld.in/blog/wp-content/uploads/2015/03/pets.jpg') !important;
+    background-image: url('../img/pets.jpg') !important;
     background-repeat: no-repeat !important;
     background-color: rgba(255, 255, 255, 0.527) !important;
     background-blend-mode: screen !important;

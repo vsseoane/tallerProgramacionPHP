@@ -2,7 +2,7 @@
 
 require_once("includes/libs/Smarty.class.php");
 require_once("class.Conexion.BD.php");
-
+//Se obtienen los parametros del archivo de configuracion
 require_once("configuracion.php");
 
 function getConexion() {
@@ -13,9 +13,6 @@ function getConexion() {
     return $cn;
 }
 
-/* function getConexion(){
-  return $conn;
-  } */
 
 function getSmarty() {
     $miSmarty = new Smarty();
@@ -26,24 +23,6 @@ function getSmarty() {
     $miSmarty->assign("usuario", usuarioLogueado());
     return $miSmarty;
 }
-
-/*function getConexion() {
-    $cn = new ConexionBD(
-            "mysql", "localhost", "mascotas", "root", "root");
-
-    $cn->conectar();
-    return $cn;
-}
-
-function getSmarty() {
-    $miSmarty = new Smarty();
-    $miSmarty->template_dir = "templates";
-    $miSmarty->compile_dir = "templates_c";
-    $miSmarty->cache_dir = "cache";
-    $miSmarty->config_dir = "config";
-    $miSmarty->assign("usuario", usuarioLogueado());
-    return $miSmarty;
-}*/
 
 function showUser() {
     $cn = getConexion();

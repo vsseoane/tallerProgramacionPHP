@@ -19,7 +19,8 @@ if (isset($_GET['id'])) {
     $indices = array();
 
     $indice = 0;
-
+    
+    /*Obtengo todas las fotos a partir del directorio creado con el id de publicacion*/
     if (is_dir($dir)) {
         $d = dir($dir);
         while (false !== ($file = $d->read())) {

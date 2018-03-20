@@ -10,14 +10,11 @@ $descripcion = $_POST['descripcion'];
 $especie = $_POST['especie'];
 $raza = $_POST['razas'];
 $barrio = $_POST['barrio'];
-//$estado = $_POST['estado'];
 $tipo = $_POST['estado'];
 $latitud = $_POST['latitud'];
 $longitud = $_POST['longitud'];
 
 $publicacionId = publicar($usuario['id'], $titulo, $descripcion, $especie, $raza, $barrio, $tipo, $latitud, $longitud);
-
-//$id_publicacion = publicar($especie, $raza,$descripcion,$tipo);
 
 $dir = "fotos/{$publicacionId}/";
 
@@ -29,8 +26,9 @@ $mensaje = "";
 $extensionesPermitidas = array("image/jpg", "image/jpeg" );
 $cont = 1;
 while (list($clave, $file) = each($_FILES)) {
-
-    $nombre = $cont . ".jpg";// $file["name"];
+    
+    //Se lleva un contador para guardar el archivo por numero y no por nombre original
+    $nombre = $cont . ".jpg";
 
     $tipoImagen = $file["type"];
 
@@ -38,15 +36,12 @@ while (list($clave, $file) = each($_FILES)) {
 
         $tmp = $file["tmp_name"];
 
-        if (move_uploaded_file($tmp, $dir . $nombre)) {
-            $mensaje .= "<br /> Archivo subido: " . $nombre;
-        } else {
-            $mensaje .= "<br />Error: " . $_FILES["archivo"]["error"];
-        }
     }
+    
     $cont++;
     
 }
+
 $cont = 1;
 
 $smarty = getSmarty();

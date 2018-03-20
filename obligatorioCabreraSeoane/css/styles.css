@@ -1,70 +1,64 @@
-body{
-    /*     background-image: url('http://www.petsworld.in/blog/wp-content/uploads/2015/03/pets.jpg') !important;
-        background-repeat: no-repeat !important;
-        background-color: rgba(255, 255, 255, 0.527) !important;
-        background-blend-mode: screen !important;
-        background-position: bottom !important; 
-        background-attachment: fixed; */
-    }
-    
-    .pagination{
-        margin-top: 5px;
-        opacity: 0.85;
-    }
-        .pagination .page-link{
-            background: black;
-            color:whitesmoke;
-        }
-    
-    .searcher{
-        margin-top: 20px;
-        margin-left: 5%;
-        margin-right: 5%;
-        box-shadow: 10px 10px 8px #888888;
-        opacity: 0.85;
-        
-    }
-        .searcher .btn{
-            margin-left: 30px;
-        }
-    
-    .col .card{
-        margin-top: 20px;
-        box-shadow: 10px 10px 8px #888888;
-    }
-    
-    .found{
-        background-color: rgba(0, 128, 0, 0.555) !important;
-    }
-    
-    .not-found{
-        background-color: rgba(255, 0, 0, 0.555) !important;
-    }
-    
-    .background-img{
-        z-index: -2;
-        /* background-image: url("https://html.com/wp-content/uploads/very-large-flamingo.jpg") !important; */
-        background-color: rgb(255, 255, 255) !important;
-    }
-    
-    
-    /* Custom File Input */
-    .custom-file-control:before{
-        content: "Subir" !important;
-    }
-    
-    .custom-file-control:after{
-        content: "Elejir archivo..." !important;
-    }
+.login{
+    color:lightgray;
+}
 
-    /*Maps*/
-    #map-publish {
-        height: 350px;
-        width: 90%;
-    }
-    
-    .cantPag{
-        margin: 20px !important;
-        margin-left: 30px;
-        
-    }
+.pagination{
+    margin-top: 5px;
+    opacity: 0.85;
+}
+.pagination .page-link{
+    background: black;
+    color:whitesmoke;
+}
+
+.searcher{
+    margin-top: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: 10px 10px 8px #888888;
+    opacity: 0.85;
+
+}
+.searcher .btn{
+    margin-left: 30px;
+}
+
+.col .card{
+    margin-top: 20px;
+    box-shadow: 10px 10px 8px #888888;
+}
+
+.found{
+    background-color: rgba(0, 128, 0, 0.555) !important;
+}
+
+.not-found{
+    background-color: rgba(255, 0, 0, 0.555) !important;
+}
+
+.background-img{
+    z-index: -2;
+    background-color: rgb(255, 255, 255) !important;
+}
+
+
+/* Custom File Input */
+.custom-file-control:before{
+    content: "Subir" !important;
+}
+
+.custom-file-control:after{
+    content: "Elejir archivo..." !important;
+}
+
+/*Maps*/
+#map-publish {
+    height: 350px;
+    width: 90%;
+}
+
+.cantPag{
+    margin: 20px !important;
+    margin-left: 30px;
+
+}

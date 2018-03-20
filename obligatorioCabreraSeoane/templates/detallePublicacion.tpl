@@ -17,6 +17,7 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/functionsDetail.js" type="text/javascript"></script>
 
         <script type="text/javascript">
 
@@ -40,35 +41,15 @@
                     });
 
                 });
-
-                var uluru;
-                var zoom = 12;
-
-                var vLat = $("#inputLatitud").val();
-                var vLng = $("#inputLongitud").val();
-
-                uluru = {lat: vLat, lng: vLng}
                 
-                alert(uluru);
-                
-                var map = new google.maps.Map(document.getElementById('map-detail'), {
-                    zoom: zoom,
-                    center: uluru
-                });
-
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map
-                });
-
             });
 
-        </script>
+
+        </script>   
 
     </head>
 
     <body>
-        <label>PRUEBAAAA</label>
 
         {if $publicacion.usuario_id == $usuarioLogueado.id}
             <!-- Modal -->
@@ -204,13 +185,13 @@
 
                         <input type="hidden" id="inputLatitud" name="inputLatitud" value="{$publicacion.latitud}" />
                         <input type="hidden" id="inputLongitud" name="inputLongitud" value="{$publicacion.longitud}" />
-
-                        {if $publicacion.latitud != '' && $publicacion.longitud !=''}
+                        
+                        {if $publicacion.latitud != '' && $publicacion.longitud !='' && ($publicacion.latitud != '0.00000000' && $publicacion.longitud !='0.00000000')}
 
                             <h3>Ubicacion exacta:</h3>
                             <label>(Opcional)</label>                      
 
-                            <div id="map-detail"> 
+                            <div id="map-publish"> 
 
                             </div>
 
@@ -220,9 +201,6 @@
 
                         <h3>Preguntas y respuestas:</h3>
                         <hr>
-
-
-
 
                         <form method="post" action="preguntar.php" id="formPreguntar">
                             <div class="form-group">
@@ -283,7 +261,7 @@
                                 </div>
 
                             {/if}
-                        {/foreach}
+                        {/foreach}  
 
                     </div>
 
@@ -291,12 +269,14 @@
 
             </div>
 
-        </div>
+        </div>            
 
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeDvKJ-T0fDDUugbdEjJMQ94LOITJcf_U&callback=initMap">
+            
         </script>
 
-
     </body>
+
+
 
 </html>

@@ -9,9 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <!--     <link rel="stylesheet" href="css/tether.min.css" /> -->
         <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
         <link rel="stylesheet" href="css/animate.css">
 
@@ -32,8 +30,6 @@
             <div class="card mb-3 searcher">
                 <div class="card-header"><h4>Búsqueda</h4></div>
                 <div class="card-body">
-
-
 
                     <div class="row justify-content-center">
 
@@ -88,8 +84,6 @@
 
                         </div>
 
-
-
                     </div>
 
                 </div>
@@ -114,7 +108,7 @@
                         <div class="col">
                             <div class="card" style="width: 20rem;">
                                 <div {if $pub.tipo=="Perdido"} class="not-found card-header" {/if} {if $pub.tipo=="Encontrado"} class="found card-header" {/if}>{$pub.tipo}</div>
-                                <!--<img class="card-img-top" src="fotos/{$pub.id}/1.jpg" alt="Card image cap"> -->
+
                                 <div class="card-body">
                                     <a class="card-title" href="detallePublicacion.php?id={$pub.id}" target="_blank" >{$pub.titulo}</a>
                                     <p class="card-text">{$pub.descripcion}

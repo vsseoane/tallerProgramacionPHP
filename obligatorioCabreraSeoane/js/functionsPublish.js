@@ -12,7 +12,6 @@ function inicializo() {
     $("#botonBuscar").click(cargarDatos);
     comportamientoBotones();
     $("#especie").change(function () {
-        console.log($(this));
         cargarEspecie($(this).val());
     });
     $("#razas").change(function () {
@@ -69,7 +68,7 @@ function comportamientoBotones() {
 }
 
 function cambiarPagina(p, estado, especie, raza, barrio, palabra, cantPagTotal) {
-    console.log("cantPagTotal? " + cantPagTotal);
+
     $.ajax({
         url: "obtenerElementos.php",
         dataType: "json",
@@ -118,6 +117,7 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra, cantPagTotal) 
             divRow.append(dirCol);
         }
         divPublicaciones.append(divRow);
+
         //recalcular paginado
         var cantResultados = cantTotalDeLaConsulta;
         var cantPaginas = Math.floor(cantResultados / cantPagTotal);
@@ -126,8 +126,6 @@ function cambiarPagina(p, estado, especie, raza, barrio, palabra, cantPagTotal) 
             cantPaginas++;
         }
 
-        console.log("cantResultados en bd: " + cantResultados);
-        console.log("cantPaginas > " + cantPaginas);
         var divPaginacion = $("#paginacion").empty();
         divPaginacion.attr("id", "paginacion");
         var nav = $("<nav />").attr("aria-label", "Page navigation example");

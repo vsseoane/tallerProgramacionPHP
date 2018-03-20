@@ -37,13 +37,13 @@
         </div>
 
         <div class="form-label-group">
-            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-            <label for="inputEmail">Email address</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
+            <label for="inputEmail">Email</label>
         </div>
 
         <div class="form-label-group">
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Clave" required="">
+            <label for="inputPassword">Clave</label>
         </div>
 
         <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
@@ -51,7 +51,7 @@
             <div class="message">{$mensaje}</div>
         <br>
         <a href="login.php">‹‹Volver</a>
-        <p class="mt-5 mb-3 text-muted text-center">© 2018</p>
+        <p class="mt-5 mb-3 text-center"> <b>© 2018</b> </p>
     </form>
 
 

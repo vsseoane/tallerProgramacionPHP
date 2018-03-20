@@ -10,11 +10,8 @@ $mensaje = $_SESSION['mensaje'] = "";
 //instancio un objeto
 $smarty = getSmarty();
 
-
-
 $cantPorPagina = 10;
 $currentPage = 1;
-
 
 $smarty->assign("mensaje", $mensaje);
 $smarty->assign("especies", obtenerEspecies());
